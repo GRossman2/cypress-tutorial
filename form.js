@@ -9,7 +9,7 @@ document.addEventListener("formdata", event => {
   const body = Object.fromEntries(event.formData.entries());
   const jsonBody = JSON.stringify(body);
   const request = new XMLHttpRequest();
-  request.open("POST", "https://jsonplaceholder.typicode.com/users/");
+  request.open("POST", "https://jsonplaceholder.typicode.com/users/"); // operational endpoint, not used when stubbing with Cypress
   request.send(jsonBody);
 
   // get the response

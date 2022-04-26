@@ -15,12 +15,17 @@ describe("Form test", () => {
       .type("Mind you if I ask some silly question?")
       .should("have.value", "Mind you if I ask some silly question?");
     
-    cy.server();
-    cy.route({
-      url: "/users/**",
-      method: "POST",
-      response: { status: "Form saved!", code: 201 }
-    });
+    // This is where we stub the response, having it return the given status code and body based on the given method and URI pattern
+    cy.intercept(
+      "POST",
+      "/users/**",
+      {
+        statusCode: 201,
+        body: {
+          status: "Form saved!"
+        }
+      }
+    );
     
     cy.get("form").submit();
     
